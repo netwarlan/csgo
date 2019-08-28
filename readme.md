@@ -1,4 +1,4 @@
-Counter-Striek Global Offensive
+Counter-Strike: Global Offensive
 ===============================
 
 The following repo contains the source files for building a Counter-Strike: Global Offensive server.
