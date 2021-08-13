@@ -38,7 +38,7 @@ echo "
 [[ -z "$CSGO_SERVER_UPDATE_ON_START" ]] && CSGO_SERVER_UPDATE_ON_START=true
 [[ -z "$CSGO_SERVER_VALIDATE_ON_START" ]] && CSGO_SERVER_VALIDATE_ON_START=false
 [[ -z "$CSGO_SERVER_TICKRATE" ]] && CSGO_SERVER_TICKRATE="128"
-
+[[ -z "$CSGO_SERVER_ENABLE_GOTV" ]] && CSGO_SERVER_ENABLE_GOTV=false
 
 
 ## Update on startup
@@ -93,10 +93,17 @@ echo "
 ║ Building server config                        ║
 ╚═══════════════════════════════════════════════╝
 "
+
+## If we need GOTV running
+if [[ "$CSGO_SERVER_ENABLE_GOTV" = true ]]; then
+  ENABLE_GOTV='tv_enable 1'
+fi
+
 cat <<EOF >> $GAME_DIR/csgo/cfg/server.cfg
 // Values passed from Docker environment
 $CSGO_SERVER_PW
 $CSGO_SERVER_RCONPW
+$ENABLE_GOTV
 EOF
 
 
