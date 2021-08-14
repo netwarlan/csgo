@@ -22,6 +22,7 @@ Environment Variable | Default Value
 CSGO_SERVER_PORT | 27015
 CSGO_SERVER_MAXPLAYERS | 16
 CSGO_SERVER_MAP | de_dust2
+CSGO_SERVER_SVLAN | 0
 CSGO_SERVER_HOSTNAME | CSGO Server
 CSGO_SERVER_PW | No password set
 CSGO_SERVER_RCONPW | No password set

@@ -27,7 +27,7 @@ echo "
 [[ -z "$CSGO_SERVER_PORT" ]] && CSGO_SERVER_PORT="27015"
 [[ -z "$CSGO_SERVER_MAXPLAYERS" ]] && CSGO_SERVER_MAXPLAYERS="16"
 [[ -z "$CSGO_SERVER_MAP" ]] && CSGO_SERVER_MAP="de_dust2"
-[[ -z "$CSGO_SVLAN" ]] && CSGO_SVLAN="0"
+[[ -z "$CSGO_SERVER_SVLAN" ]] && CSGO_SERVER_SVLAN="0"
 [[ -z "$CSGO_SERVER_HOSTNAME" ]] && CSGO_SERVER_HOSTNAME="CSGO Server"
 [[ ! -z "$CSGO_SERVER_PW" ]] && CSGO_SERVER_PW="+sv_password $CSGO_SERVER_PW"
 [[ ! -z "$CSGO_SERVER_RCONPW" ]] && CSGO_SERVER_RCONPW="+rcon_password $CSGO_SERVER_RCONPW"
@@ -96,7 +96,7 @@ echo "
 ╚═══════════════════════════════════════════════╝
   Hostname: $CSGO_SERVER_HOSTNAME
   Port: $CSGO_SERVER_PORT
-  LAN: $CSGO_SVLAN
+  LAN: $CSGO_SERVER_SVLAN
   Max Players: $CSGO_SERVER_MAXPLAYERS
   Map: $CSGO_SERVER_MAP
   Game Type: $CSGO_SERVER_GAME_TYPE
@@ -109,7 +109,7 @@ echo "
 $GAME_DIR/srcds_run -game csgo -console -usercon \
 +hostname \"${CSGO_SERVER_HOSTNAME}\" \
 -port $CSGO_SERVER_PORT \
-+sv_lan $CSGO_SVLAN \
++sv_lan $CSGO_SERVER_SVLAN \
 -maxplayers_override $CSGO_SERVER_MAXPLAYERS \
 +map $CSGO_SERVER_MAP \
 +game_type $CSGO_SERVER_GAME_TYPE \
