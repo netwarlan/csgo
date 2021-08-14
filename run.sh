@@ -29,8 +29,8 @@ echo "
 [[ -z "$CSGO_SERVER_MAP" ]] && CSGO_SERVER_MAP="de_dust2"
 [[ -z "$CSGO_SVLAN" ]] && CSGO_SVLAN="0"
 [[ -z "$CSGO_SERVER_HOSTNAME" ]] && CSGO_SERVER_HOSTNAME="CSGO Server"
-[[ ! -z "$CSGO_SERVER_PW" ]] && CSGO_SERVER_PW="sv_password $CSGO_SERVER_PW"
-[[ ! -z "$CSGO_SERVER_RCONPW" ]] && CSGO_SERVER_RCONPW="rcon_password $CSGO_SERVER_RCONPW"
+[[ ! -z "$CSGO_SERVER_PW" ]] && CSGO_SERVER_PW="+sv_password $CSGO_SERVER_PW"
+[[ ! -z "$CSGO_SERVER_RCONPW" ]] && CSGO_SERVER_RCONPW="+rcon_password $CSGO_SERVER_RCONPW"
 [[ -z "$CSGO_SERVER_GAME_TYPE" ]] && CSGO_SERVER_GAME_TYPE="0"
 [[ -z "$CSGO_SERVER_GAME_MODE" ]] && CSGO_SERVER_GAME_MODE="0"
 [[ -z "$CSGO_SERVER_MAPGROUP" ]] && CSGO_SERVER_MAPGROUP="mg_active"
@@ -38,7 +38,8 @@ echo "
 [[ -z "$CSGO_SERVER_UPDATE_ON_START" ]] && CSGO_SERVER_UPDATE_ON_START=true
 [[ -z "$CSGO_SERVER_VALIDATE_ON_START" ]] && CSGO_SERVER_VALIDATE_ON_START=false
 [[ -z "$CSGO_SERVER_TICKRATE" ]] && CSGO_SERVER_TICKRATE="128"
-[[ -z "$CSGO_SERVER_ENABLE_GOTV" ]] && CSGO_SERVER_ENABLE_GOTV=false
+[[ -z "$CSGO_SERVER_GOTV_ENABLE" ]] && CSGO_SERVER_GOTV_ENABLE="0"
+[[ -z "$CSGO_SERVER_GOTV_PORT" ]] && CSGO_SERVER_GOTV_PORT="27020"
 
 
 ## Update on startup
@@ -86,26 +87,6 @@ fi
 
 
 
-## Build server config
-## ==============================================
-echo "
-╔═══════════════════════════════════════════════╗
-║ Building server config                        ║
-╚═══════════════════════════════════════════════╝
-"
-
-## If we need GOTV running
-if [[ "$CSGO_SERVER_ENABLE_GOTV" = true ]]; then
-  ENABLE_GOTV='tv_enable 1'
-fi
-
-cat <<EOF >> $GAME_DIR/csgo/cfg/server.cfg
-// Values passed from Docker environment
-$CSGO_SERVER_PW
-$CSGO_SERVER_RCONPW
-$ENABLE_GOTV
-EOF
-
 
 ## Run
 ## ==============================================
@@ -115,11 +96,27 @@ echo "
 ╚═══════════════════════════════════════════════╝
   Hostname: $CSGO_SERVER_HOSTNAME
   Port: $CSGO_SERVER_PORT
+  LAN: $CSGO_SVLAN
   Max Players: $CSGO_SERVER_MAXPLAYERS
   Map: $CSGO_SERVER_MAP
   Game Type: $CSGO_SERVER_GAME_TYPE
   Game Mode: $CSGO_SERVER_GAME_MODE
   Map Group: $CSGO_SERVER_MAPGROUP
   Tickrate: $CSGO_SERVER_TICKRATE
+  GOTV: $CSGO_SERVER_GOTV_ENABLE
 "
-$GAME_DIR/srcds_run -game csgo -console -usercon +hostname \"${CSGO_SERVER_HOSTNAME}\" +game_type $CSGO_SERVER_GAME_TYPE +game_mode $CSGO_SERVER_GAME_MODE +mapgroup $CSGO_SERVER_MAPGROUP +port $CSGO_SERVER_PORT -maxplayers_override $CSGO_SERVER_MAXPLAYERS +map $CSGO_SERVER_MAP +sv_lan $CSGO_SVLAN -tickrate $CSGO_SERVER_TICKRATE
+
+$GAME_DIR/srcds_run -game csgo -console -usercon \
++hostname \"${CSGO_SERVER_HOSTNAME}\" \
+-port $CSGO_SERVER_PORT \
++sv_lan $CSGO_SVLAN \
+-maxplayers_override $CSGO_SERVER_MAXPLAYERS \
++map $CSGO_SERVER_MAP \
++game_type $CSGO_SERVER_GAME_TYPE \
++game_mode $CSGO_SERVER_GAME_MODE \
++mapgroup $CSGO_SERVER_MAPGROUP \
+-tickrate $CSGO_SERVER_TICKRATE \
+$CSGO_SERVER_RCONPW \
+$CSGO_SERVER_PW \
++tv_enable $CSGO_SERVER_GOTV_ENABLE \
++tv_port $CSGO_SERVER_GOTV_PORT
