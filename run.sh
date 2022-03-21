@@ -31,6 +31,7 @@ echo "
 [[ -z "$CSGO_SERVER_HOSTNAME" ]] && CSGO_SERVER_HOSTNAME="CSGO Server"
 [[ ! -z "$CSGO_SERVER_PW" ]] && CSGO_SERVER_PW="+sv_password $CSGO_SERVER_PW"
 [[ ! -z "$CSGO_SERVER_RCONPW" ]] && CSGO_SERVER_RCONPW="+rcon_password $CSGO_SERVER_RCONPW"
+[[ -z "$CSGO_SERVER_STEAMACCOUNT" ]] && CSGO_SERVER_STEAMACCOUNT=""
 [[ -z "$CSGO_SERVER_GAME_TYPE" ]] && CSGO_SERVER_GAME_TYPE="0"
 [[ -z "$CSGO_SERVER_GAME_MODE" ]] && CSGO_SERVER_GAME_MODE="0"
 [[ -z "$CSGO_SERVER_MAPGROUP" ]] && CSGO_SERVER_MAPGROUP="mg_active"
@@ -123,6 +124,7 @@ $GAME_DIR/srcds_run -game csgo -console -usercon \
 -tickrate $CSGO_SERVER_TICKRATE \
 $CSGO_SERVER_RCONPW \
 $CSGO_SERVER_PW \
++sv_setsteamaccount $CSGO_SERVER_STEAMACCOUNT \
 +tv_enable $CSGO_SERVER_GOTV_ENABLE \
 +tv_port $CSGO_SERVER_GOTV_PORT \
 +tv_name \"${CSGO_SERVER_GOTV_NAME}\" \
