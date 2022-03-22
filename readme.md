@@ -19,6 +19,7 @@ Below are the ones currently supported and their (defaults):
 
 Environment Variable | Default Value
 -------------------- | -------------
+CSGO_SERVER_IP | Not set
 CSGO_SERVER_PORT | 27015
 CSGO_SERVER_MAXPLAYERS | 16
 CSGO_SERVER_MAP | de_dust2

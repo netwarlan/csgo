@@ -24,6 +24,7 @@ echo "
 
 ## Set default values if none were provided
 ## ==============================================
+[[ ! -z "$CSGO_SERVER_IP" ]] && CSGO_SERVER_IP="-ip $CSGO_SERVER_IP"
 [[ -z "$CSGO_SERVER_PORT" ]] && CSGO_SERVER_PORT="27015"
 [[ -z "$CSGO_SERVER_MAXPLAYERS" ]] && CSGO_SERVER_MAXPLAYERS="16"
 [[ -z "$CSGO_SERVER_MAP" ]] && CSGO_SERVER_MAP="de_dust2"
@@ -63,8 +64,8 @@ echo "
   fi
 
   $STEAMCMD_DIR/steamcmd.sh \
-  +login $STEAMCMD_USER $STEAMCMD_PASSWORD $STEAMCMD_AUTH_CODE \
   +force_install_dir $GAME_DIR \
+  +login $STEAMCMD_USER $STEAMCMD_PASSWORD $STEAMCMD_AUTH_CODE \
   +app_update $STEAMCMD_APP $VALIDATE_FLAG \
   +quit
 
@@ -101,6 +102,7 @@ echo "
 ║ Starting SERVER                               ║
 ╚═══════════════════════════════════════════════╝
   Hostname: $CSGO_SERVER_HOSTNAME
+  IP: $CSGO_SERVER_IP
   Port: $CSGO_SERVER_PORT
   LAN: $CSGO_SERVER_SVLAN
   Max Players: $CSGO_SERVER_MAXPLAYERS
@@ -114,6 +116,7 @@ echo "
 
 $GAME_DIR/srcds_run -game csgo -console -usercon \
 +hostname \"${CSGO_SERVER_HOSTNAME}\" \
+$CSGO_SERVER_IP \
 -port $CSGO_SERVER_PORT \
 +sv_lan $CSGO_SERVER_SVLAN \
 -maxplayers_override $CSGO_SERVER_MAXPLAYERS \
