@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t csgo .
+docker build -t netwarlan/csgo .

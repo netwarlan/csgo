@@ -95,23 +95,24 @@ fi
 
 
 
+## Print Variables
+## ==============================================
+echo "
+╔═══════════════════════════════════════════════╗
+║ Server set with provided values               ║
+╚═══════════════════════════════════════════════╝
+"
+printenv | grep CSGO
+
+
+
+
 ## Run
 ## ==============================================
 echo "
 ╔═══════════════════════════════════════════════╗
 ║ Starting SERVER                               ║
 ╚═══════════════════════════════════════════════╝
-  Hostname: $CSGO_SERVER_HOSTNAME
-  IP: $CSGO_SERVER_IP
-  Port: $CSGO_SERVER_PORT
-  LAN: $CSGO_SERVER_SVLAN
-  Max Players: $CSGO_SERVER_MAXPLAYERS
-  Map: $CSGO_SERVER_MAP
-  Game Type: $CSGO_SERVER_GAME_TYPE
-  Game Mode: $CSGO_SERVER_GAME_MODE
-  Map Group: $CSGO_SERVER_MAPGROUP
-  Tickrate: $CSGO_SERVER_TICKRATE
-  GOTV: $CSGO_SERVER_GOTV_ENABLE
 "
 
 $GAME_DIR/srcds_run -game csgo -console -usercon \
