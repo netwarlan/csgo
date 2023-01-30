@@ -10,7 +10,7 @@ docker run -d \
 -p 27015:27015/udp \
 -p 27015:27015/tcp \
 -e CSGO_SERVER_HOSTNAME="DOCKER CSGO" \
-netwarlan/csgo
+ghcr.io/netwarlan/csgo:latest
 ```
 
 ### Environment Variables
