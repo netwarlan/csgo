@@ -8,9 +8,9 @@ ENV:
   tag: latest
 
 jobs:
-  publish-hello-docker-image:
+  build:
     runs-on: ubuntu-latest
-      steps:
+    steps:
       - name: Checkout Code
         uses: actions/checkout@v3
       
