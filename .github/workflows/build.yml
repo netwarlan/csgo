@@ -2,7 +2,7 @@ name: build
 on: 
   push
 
-ENV:
+env:
   registry: ghcr.io/netwarlan
   image: csgo
   tag: latest
