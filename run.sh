@@ -114,8 +114,7 @@ echo "
 ║ Starting SERVER                               ║
 ╚═══════════════════════════════════════════════╝
 "
-
-$GAME_DIR/srcds_run -game csgo -console -usercon \
+$GAME_DIR/srcds_run -game csgo -console -usercon -secure \
 +hostname \"${CSGO_SERVER_HOSTNAME}\" \
 $CSGO_SERVER_IP \
 -port $CSGO_SERVER_PORT \
